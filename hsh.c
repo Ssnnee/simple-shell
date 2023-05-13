@@ -8,6 +8,8 @@
  */
 int main(int argc, char **argv)
 {
+	app_name = argv[0];
+
 	/* Suppress unused parameter warnings */
 	(void)argc;
 	(void)argv;

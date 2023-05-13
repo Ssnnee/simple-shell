@@ -26,7 +26,8 @@ int execute(char **args)
 		cmd = args[0];
 		if (execve(cmd, args, NULL) == -1)
 		{
-			perror("Error when executing command");
+			/* perror("Error when executing command");*/
+			perror(app_name);
 		}
 	}
 	return (1);
