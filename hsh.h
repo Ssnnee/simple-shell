@@ -13,5 +13,6 @@ char **parse_line(char *line);
 int shell_loop(void);
 
 char *get_full_path(char *cmd);
+int _strcmp(char *str1, char *str2);
 
 #endif

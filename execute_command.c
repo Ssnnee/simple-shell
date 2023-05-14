@@ -25,6 +25,11 @@ int execute(char **args)
 		return (1);
 	if (args)
 	{
+		/*Handle exit cmd */
+		if (_strcmp(args[0], "exit"))
+		{
+			exit(0);
+		}
 		cmd = get_full_path(args[0]);
 
 		/*Use fork to come back on the shell after execution of cmd*/
@@ -34,6 +39,8 @@ int execute(char **args)
 			if (execve(cmd, args, NULL) == -1)
 			{
 				perror(app_name);
+				/*exit child process*/
+				exit(0);
 			}
 		}
 		else
