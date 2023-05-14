@@ -12,5 +12,6 @@ int execute(char **args);
 char **parse_line(char *line);
 int shell_loop(void);
 
+char *get_full_path(char *cmd);
 
 #endif

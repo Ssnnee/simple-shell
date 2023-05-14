@@ -16,6 +16,8 @@
 int execute(char **args)
 {
 	char *cmd;
+	pid_t child_pid;
+	int status;
 
 	cmd = NULL;
 	/* This for an empty command*/
@@ -23,11 +25,20 @@ int execute(char **args)
 		return (1);
 	if (args)
 	{
-		cmd = args[0];
-		if (execve(cmd, args, NULL) == -1)
+		cmd = get_full_path(args[0]);
+
+		/*Use fork to come back on the shell after execution of cmd*/
+		child_pid = fork();
+		if (child_pid == 0)
 		{
-			/* perror("Error when executing command");*/
-			perror(app_name);
+			if (execve(cmd, args, NULL) == -1)
+			{
+				perror(app_name);
+			}
+		}
+		else
+		{
+			wait(&status);
 		}
 	}
 	return (1);
