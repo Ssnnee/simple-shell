@@ -5,12 +5,10 @@
 #define MAX_ARGS 10
 #define MAX_LINE 1024
 
-char *app_name;
-
 int _putchar(int c);
-int execute(char **args);
+int execute(char *app_name, char **args, char **envp);
 char **parse_line(char *line);
-int shell_loop(void);
+int shell_loop(char *app_name, char **envp);
 
 char *get_full_path(char *cmd);
 int _strcmp(char *str1, char *str2);

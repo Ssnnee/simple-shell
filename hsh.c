@@ -4,19 +4,18 @@
  * main - The main function of the shell program.
  * @argc: The number of arguments passed to the program.
  * @argv: An array of strings containing the arguments passed to the program.
+ * @envp: Environment variables pointer
  *
  * Return: The exit status of the shell program.
  */
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
-	app_name = argv[0];
-
 	/* Suppress unused parameter warnings */
 	(void)argc;
 	(void)argv;
 
 	/* Run the shell loop */
-	return (shell_loop());
+	return (shell_loop(argv[0], envp));
 }
 /**
  * _putchar - This function writes a character to stdout.
@@ -31,7 +30,7 @@ int _putchar(int c)
 }
 
 /**
- * get_full_path: this function gets the full path
+ * get_full_path - this function gets the full path
  * of the command
  * @cmd: string of the command
  *
@@ -44,8 +43,8 @@ char *get_full_path(char *cmd)
 
 	while (cmd[i] != '\0')
 	{
-		/* if the character / is found we assume that it's
-		 * already full path*/
+		/* if the character / is found we assume that it's*/
+		/* already full path*/
 		if (cmd[i] == '/')
 		{
 			found = 1;
@@ -55,28 +54,26 @@ char *get_full_path(char *cmd)
 	}
 	if (found)
 		return (cmd);
-	else
-	{
-		/* i already contains the size of initial cmd
-		 * we add 5 for '/bin/ */
-		new_cmd = malloc(sizeof(char) * (i + 5));
-		new_cmd[0] = '/';
-		new_cmd[1] = 'b';
-		new_cmd[2] = 'i';
-		new_cmd[3] = 'n';
-		new_cmd[4] = '/';
 
-		while (j < i)
-		{
-			*(new_cmd + 5 + j) = *(cmd + j);
-			j++;
-		}
-		return (new_cmd);
+	/* i already contains the size of initial cmd*/
+	 /* we add 5 for '/bin/ */
+	new_cmd = malloc(sizeof(char) * (i + 5));
+	new_cmd[0] = '/';
+	new_cmd[1] = 'b';
+	new_cmd[2] = 'i';
+	new_cmd[3] = 'n';
+	new_cmd[4] = '/';
+
+	while (j < i)
+	{
+		*(new_cmd + 5 + j) = *(cmd + j);
+		j++;
 	}
+	return (new_cmd);
 }
 
 /**
- * _strcmp: compares two strings
+ * _strcmp - compares two strings
  * @str1: first string
  * @str2: second string
  *

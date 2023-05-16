@@ -10,10 +10,12 @@
 
 /**
  * shell_loop - This function runs the main loop of the shell program.
+ * @app_name: Name of the app
+ * @envp: Environment variables
  *
  * Return: The exit status of the shell program.
  */
-int shell_loop(void)
+int shell_loop(char *app_name, char **envp)
 {
 	char *line;
 	char **args;
@@ -38,7 +40,7 @@ int shell_loop(void)
 		args = parse_line(line);
 
 		/* Execute the command */
-		status = execute(args);
+		status = execute(app_name, args, envp);
 		free(line);
 		free(args);
 	} while (status);

@@ -9,11 +9,14 @@
 #include <sys/time.h>
 /**
  * execute - This function executes a command with the given arguments.
+ * @app_name: Name of the application
  * @args: The arguments for the command.
+ * @envp: Environment variables pointer
+ *
  *
  * Return: The exit status of the command.
  */
-int execute(char **args)
+int execute(char *app_name, char **args, char **envp)
 {
 	char *cmd;
 	pid_t child_pid;
@@ -36,7 +39,7 @@ int execute(char **args)
 		child_pid = fork();
 		if (child_pid == 0)
 		{
-			if (execve(cmd, args, NULL) == -1)
+			if (execve(cmd, args, envp) == -1)
 			{
 				perror(app_name);
 				/*exit child process*/
