@@ -30,26 +30,32 @@ int execute(char *app_name, char **args, char **envp)
 	{
 		/*Handle exit cmd */
 		if (_strcmp(args[0], "exit"))
-		{
 			exit(0);
-		}
 		cmd = get_full_path(args[0]);
-
 		/*Use fork to come back on the shell after execution of cmd*/
 		child_pid = fork();
 		if (child_pid == 0)
 		{
 			if (execve(cmd, args, envp) == -1)
 			{
-				perror(app_name);
-				/*exit child process*/
-				exit(0);
+			       	char *error_msg, *not_found_msg;
+				int i;
+
+				error_msg = app_name;
+				for (i = 0; error_msg[i] != '\0'; i++)
+					_putchar(error_msg[i]);
+				_putchar(':');
+				_putchar(' ');
+				for (i = 0; args[0][i] != '\0'; i++)
+					_putchar(args[0][i]);
+
+				not_found_msg = ": not found\n";
+				for (i = 0; not_found_msg[i] != '\0'; i++)
+					_putchar(not_found_msg[i]);
+				exit(EXIT_FAILURE);
 			}
 		}
 		else
-		{
 			wait(&status);
-		}
-	}
-	return (1);
+	} return (1);
 }

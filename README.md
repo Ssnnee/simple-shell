@@ -4,7 +4,7 @@
 This is a simple implementation of a shell
 
 ## Usage
-+ Compile your code with `gcc -Wall -Werror -Wextra -pedantic *.c`
++ Compile your code with `gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`
 + Include the "main.h" header file on the functions you can have
 * Output: prompt to terminal: `$ `
 
@@ -15,6 +15,7 @@ This is a simple implementation of a shell
 * `shell_loop.c` : Contains the shell_loop function(runs the main loop of the shell program)
 * `parse_line.c`: Contains the parse_line function (parses a line of input into an array of arguments)
 * `execute_command.c`: Contains the execute func
+* `getline.c` : Our own getline functon
 
 ### Code styling
 Betty
