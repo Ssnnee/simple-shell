@@ -38,7 +38,7 @@ int execute(char *app_name, char **args, char **envp)
 		{
 			if (execve(cmd, args, envp) == -1)
 			{
-			       	char *error_msg, *not_found_msg;
+				char *error_msg, *not_found_msg;
 				int i;
 
 				error_msg = app_name;

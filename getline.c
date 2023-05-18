@@ -9,26 +9,19 @@
  * NULL if end of file is reached or an error occurs.
  */
 char *_getline(void)
-{ static char buf[MAX_LINE];
+{
+	static char buf[MAX_LINE];
 	static int buf_pos, buf_size;
 	char *line;
 	int line_pos, line_size;
 
-	buf_pos = 0, buf_size = 0, line_pos = 0, line_size = 0;
-	line = NULL;
+	buf_pos = 0, buf_size = 0, line_pos = 0, line_size = 0, line = NULL;
 while (1)
 {
 	if (buf_pos >= buf_size)
 	{ buf_size = read(STDIN_FILENO, buf, MAX_LINE);
 		if (buf_size == 0)
-		{
-			if (line_size == 0)
-				return (NULL);
-			else
-			{ line[line_pos] = '\0';
-				return (line);
-			}
-		}
+			return ((line_size == 0) ? NULL : (line[line_pos] = '\0', line));
 		if (buf_size < 0)
 			exit(EXIT_FAILURE);
 	}
@@ -56,6 +49,4 @@ while (1)
 			}
 			line[line_pos++] = buf[buf_pos++];
 		}
-	}
-}
-}
+	} } }
