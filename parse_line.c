@@ -31,7 +31,7 @@ char **parse_line(char *line)
 
 	i = 0;
 	/* " \t\n" Delimiters used to separate arguments*/
-	while ((arg = strtok(i == 0 ? line : NULL, " \t\n")) != NULL)
+	while ((arg = _strtok(i == 0 ? line : NULL, " \t\n")) != NULL)
 	{
 		args[i++] = arg;
 		if (i == MAX_ARGS)

@@ -13,6 +13,8 @@ int shell_loop(char *app_name, char **envp);
 char *get_full_path(char *cmd);
 int _strcmp(char *str1, char *str2);
 
-char* _getline(void);
+char *_getline(void);
+char *_strtok(char *str, char *delimiters);
+int find_char(char c, char *str);
 
 #endif

@@ -13,7 +13,7 @@ char *_getline(void)
 	static char buf[MAX_LINE];
 	static int buf_pos, buf_size;
 	char *line;
-	int line_pos, line_size;
+	int line_pos, line_size, i;
 
 	buf_pos = 0, buf_size = 0, line_pos = 0, line_size = 0, line = NULL;
 while (1)
@@ -42,7 +42,7 @@ while (1)
 					exit(EXIT_FAILURE);
 				if (line != NULL)
 				{
-					for (int i = 0; i < line_pos; i++)
+					for (i = 0; i < line_pos; i++)
 						new_line[i] = line[i];
 					free(line);
 				} line = new_line;
