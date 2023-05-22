@@ -17,4 +17,6 @@ char *_getline(void);
 char *_strtok(char *str, char *delimiters);
 int find_char(char c, char *str);
 
+int _atoi(char *s);
+
 #endif
