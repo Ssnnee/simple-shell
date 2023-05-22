@@ -35,7 +35,7 @@ int execute(char *app_name, char **args, char **envp)
 				exit(0);
 			else
 			{
-				exit((args[1]));
+				exit(_atoi(args[1]));
 			}
 		}
 		cmd = get_full_path(args[0]);
