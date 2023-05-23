@@ -16,6 +16,7 @@ This is a simple implementation of a shell
 * `parse_line.c`: Contains the parse_line function (parses a line of input into an array of arguments)
 * `execute_command.c`: Contains the execute func
 * `getline.c` : Our own getline functon
+* `atoi.c` : Contains our own atoi func
 
 ### Code styling
 Betty
