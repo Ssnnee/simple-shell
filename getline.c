@@ -27,7 +27,7 @@ while (1)
 	}
 	while (buf_pos < buf_size)
 	{
-		if (buf[buf_pos] == '\n')
+		if (buf[buf_pos] == '\n' || buf[buf_pos] == EOF)
 		{ buf_pos++;
 			line[line_pos] = '\0';
 			return (line);
