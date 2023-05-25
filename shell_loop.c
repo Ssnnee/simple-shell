@@ -15,13 +15,15 @@
  *
  * Return: The exit status of the shell program.
  */
+
 int shell_loop(char *app_name, char **envp)
 {
 	char *line;
 	char **args;
-	int status;
+	int status, i;
 
 	line = NULL;
+	/* Run the shell loop */
 	do {
 		/* Print the prompt if stdin is a terminal */
 		if (isatty(STDIN_FILENO))
@@ -37,15 +39,21 @@ int shell_loop(char *app_name, char **envp)
 			free(line);
 			exit(EXIT_SUCCESS);
 		}
+		i = 0;
+		while (line[i] != '\0' && (line[i] == ' '
+					|| line[i] == '\t' || line[i] == '\n'))
+			i++;
+		if (line[i] == '\0')
+			continue;
 
 		/* Parse the line into arguments */
 		args = parse_line(line);
 
 		/* Execute the command */
 		status = execute(app_name, args, envp);
-
 		free(args);
 	} while (status);
+
 	free(line);
 	return (EXIT_SUCCESS);
 }

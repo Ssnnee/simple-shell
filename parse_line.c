@@ -29,10 +29,9 @@ char **parse_line(char *line)
 	}
 
 	i = 0;
-
 	while ((arg = _strtok(i == 0 ? line : NULL, " \t\n")) != NULL)
 	{
-		if (arg[0] != '\0')
+		if (arg[0] != '\0') /* check for empty argument */
 		{
 			args[i++] = arg;
 			if (i == MAX_ARGS)

@@ -23,33 +23,33 @@ int execute(char *app_name, char **args, char **envp)
 	int status;
 
 	cmd = NULL;
-	/* This for an empty command*/
-	if (args[0] == NULL)
+	/* Check for an empty command */
+	if (args[0] == NULL || args[0][0] == '\0')
 		return (1);
-	if (args)
+
+	/* Handle exit cmd */
+	if (_strcmp(args[0], "exit"))
 	{
-		/*Handle exit cmd */
-		if (_strcmp(args[0], "exit"))
-		{
-			if (args[1] == NULL)
-				exit(0);
-			else
-			{
-				exit(_atoi(args[1]));
-			}
-		}
-		cmd = get_full_path(args[0]);
-		/*Use fork to come back on the shell after execution of cmd*/
-		child_pid = fork();
-		if (child_pid == 0)
-		{
-			if (execve(cmd, args, envp) == -1)
-			{
-				perror(app_name);
-				exit(EXIT_FAILURE);
-			}
-		}
+		if (args[1] == NULL)
+			exit(0);
 		else
-			wait(&status);
-	} return (1);
+		{
+			exit(_atoi(args[1]));
+		}
+	}
+	cmd = get_full_path(args[0]);
+	/* Use fork to come back on the shell after execution of cmd */
+	child_pid = fork();
+	if (child_pid == 0)
+	{
+		if (execve(cmd, args, envp) == -1)
+		{
+			perror(app_name);
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+		wait(&status);
+
+	return (1);
 }

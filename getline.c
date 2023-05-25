@@ -2,10 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 /**
- * _read_input - This function reads input from
- * the standard input into a buffer.
+ * _read_input - This function reads input from the standard
+ * input into a buffer.
  * @buf: The buffer to store the input.
  * @buf_size: The size of the buffer.
  *
@@ -18,6 +17,7 @@ ssize_t _read_input(char *buf, size_t buf_size)
 	n_read = read(STDIN_FILENO, buf, buf_size);
 	if (n_read < 0)
 		exit(EXIT_FAILURE);
+
 	return (n_read);
 }
 
@@ -32,8 +32,8 @@ ssize_t _read_input(char *buf, size_t buf_size)
  *
  * Return: 1 if a line was extracted from the buffer, 0 otherwise.
  */
-int _get_line_from_buf(char *buf, int *buf_pos,
-		int buf_size, char **line, int *line_pos, int *line_size)
+int _get_line_from_buf(char *buf, int *buf_pos, int buf_size,
+		char **line, int *line_pos, int *line_size)
 {
 	int i;
 
@@ -51,7 +51,6 @@ int _get_line_from_buf(char *buf, int *buf_pos,
 			{
 				char *new_line;
 				*line_size += MAX_LINE;
-
 				new_line = malloc(*line_size);
 				if (new_line == NULL)
 					exit(EXIT_FAILURE);
@@ -68,6 +67,7 @@ int _get_line_from_buf(char *buf, int *buf_pos,
 	}
 	return (0);
 }
+
 /**
  * _getline - This function reads a line from standard input.
  *
@@ -81,7 +81,6 @@ char *_getline(void)
 	int line_pos, line_size;
 
 	buf_pos = 0, buf_size = 0, line_pos = 0, line_size = 0, line = NULL;
-
 	while (1)
 	{
 		if (buf_pos >= buf_size)

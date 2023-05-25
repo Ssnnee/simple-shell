@@ -56,7 +56,7 @@ char *get_full_path(char *cmd)
 		return (cmd);
 
 	/* i already contains the size of initial cmd*/
-	 /* we add 5 for '/bin/ */
+	/* we add 5 for '/bin/ */
 	new_cmd = malloc(sizeof(char) * (i + 5));
 	new_cmd[0] = '/';
 	new_cmd[1] = 'b';
@@ -91,3 +91,4 @@ int _strcmp(char *str1, char *str2)
 	}
 	return (1);
 }
+
