@@ -21,13 +21,22 @@ int shell_loop(char *app_name, char **envp)
 	char **args;
 	int status;
 
+	line = NULL;
 	do {
-		/* Print the prompt */
-		_putchar('$');
-		_putchar(' ');
+		/* Print the prompt if stdin is a terminal */
+		if (isatty(STDIN_FILENO))
+		{
+			_putchar('$');
+			_putchar(' ');
+		}
 
 		/* Read a line from stdin */
 		line = _getline();
+		if (line == NULL)
+		{
+			free(line);
+			exit(EXIT_SUCCESS);
+		}
 
 		/* Parse the line into arguments */
 		args = parse_line(line);
@@ -35,8 +44,8 @@ int shell_loop(char *app_name, char **envp)
 		/* Execute the command */
 		status = execute(app_name, args, envp);
 
-		free(line);
 		free(args);
 	} while (status);
+	free(line);
 	return (EXIT_SUCCESS);
 }

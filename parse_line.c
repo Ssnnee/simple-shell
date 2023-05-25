@@ -21,7 +21,6 @@ char **parse_line(char *line)
 	char *arg;
 	int i;
 
-	/*The MAX_ARGS is just a buffer; like in the prevous project*/
 	args = malloc(MAX_ARGS * sizeof(char *));
 	if (!args)
 	{
@@ -30,14 +29,17 @@ char **parse_line(char *line)
 	}
 
 	i = 0;
-	/* " \t\n" Delimiters used to separate arguments*/
+
 	while ((arg = _strtok(i == 0 ? line : NULL, " \t\n")) != NULL)
 	{
-		args[i++] = arg;
-		if (i == MAX_ARGS)
+		if (arg[0] != '\0')
 		{
-			perror("Too many arguments");
-			exit(EXIT_FAILURE);
+			args[i++] = arg;
+			if (i == MAX_ARGS)
+			{
+				perror("Too many arguments");
+				exit(EXIT_FAILURE);
+			}
 		}
 	}
 	args[i] = NULL;

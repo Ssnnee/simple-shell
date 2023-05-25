@@ -18,5 +18,7 @@ char *_strtok(char *str, char *delimiters);
 int find_char(char c, char *str);
 
 int _atoi(char *s);
+ssize_t _read_input(char *buf, size_t buf_size);
+int _get_line_from_buf(char *buf, int *buf_pos, int buf_size, char **line, int *line_pos, int *line_size);
 
 #endif

@@ -18,13 +18,16 @@ char *_strtok(char *str, char *delimiters)
 	/* first time call */
 	if (str != NULL)
 		tmp_str = str;
-	else
-		if (tmp_str == NULL)
-			return (NULL);
+	else if (tmp_str == NULL || *tmp_str == '\0')
+		return (NULL);
 
 	/* end of string */
 	if (tmp_str == NULL)
 		return (NULL);
+
+	/* Skip leading spaces */
+	while (find_char(*tmp_str, delimiters))
+		tmp_str++;
 
 	token = tmp_str;
 	found = 0;
