@@ -26,8 +26,6 @@ int execute(char *app_name, char **args, char **envp)
 	/* Check for an empty command */
 	if (args[0] == NULL || args[0][0] == '\0')
 		return (1);
-
-	/* Handle exit cmd */
 	if (_strcmp(args[0], "exit"))
 	{
 		if (args[1] == NULL)
@@ -38,6 +36,14 @@ int execute(char *app_name, char **args, char **envp)
 		}
 	}
 	cmd = get_full_path(args[0]);
+
+	/* Check if the command exists */
+	if (access(cmd, X_OK) == -1)
+	{
+		perror(app_name);
+		return (1);
+	}
+
 	/* Use fork to come back on the shell after execution of cmd */
 	child_pid = fork();
 	if (child_pid == 0)
@@ -53,3 +59,4 @@ int execute(char *app_name, char **args, char **envp)
 
 	return (1);
 }
+
