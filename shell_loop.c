@@ -21,7 +21,7 @@ int shell_loop(char *app_name, char **envp)
 	char *line = NULL;
 	size_t len = 0;
 	ssize_t nread;
-	char **args;
+	char **args = NULL;
 	int status, i;
 	char *command, *saveptr;
 
