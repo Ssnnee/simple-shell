@@ -20,7 +20,7 @@ int execute(char *app_name, char **args, char **envp)
 {
 	char *cmd;
 	pid_t child_pid;
-	int status;
+	int status, exit_code;	
 
 	cmd = NULL;
 	/* Check for an empty command */
@@ -29,13 +29,18 @@ int execute(char *app_name, char **args, char **envp)
 	if (_strcmp(args[0], "exit"))
 	{
 		if (args[1] == NULL)
+		{
+			free(args);
 			exit(0);
+		}
 		else
 		{
-			exit(_atoi(args[1]));
+			exit_code = _atoi(args[1]);
+			free(args);
+			exit(exit_code);
 		}
 	}
-	cmd = get_full_path(args[0]);
+	cmd = get_full_path(*(args + 0), envp);
 
 	/* Check if the command exists */
 	if (access(cmd, X_OK) == -1)
@@ -56,7 +61,7 @@ int execute(char *app_name, char **args, char **envp)
 	}
 	else
 		wait(&status);
-
+	free(cmd);
 	return (1);
 }
 
