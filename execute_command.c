@@ -33,7 +33,7 @@ int execute(char *app_name, char **args, char **envp)
 		else
 		{
 			exit_code = _atoi(args[1]);
-			exit((exit_code >= 0 && exit_code <= 255) ? exit_code : 256 - exit_code);
+			exit((exit_code >= 0 && exit_code <= 255) ? exit_code : exit_code % 256);
 		}
 	}
 	cmd = get_full_path(args[0]);
