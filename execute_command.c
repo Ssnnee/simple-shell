@@ -37,7 +37,6 @@ int execute(char *app_name, char **args, char **envp)
 		}
 	}
 	cmd = get_full_path(args[0]);
-
 	/* Check if the command exists */
 	if (access(cmd, X_OK) == -1)
 	{
@@ -57,7 +56,6 @@ int execute(char *app_name, char **args, char **envp)
 	}
 	else
 		wait(&status);
-
 	return (1);
 }
 
