@@ -20,7 +20,7 @@ int execute(char *app_name, char **args, char **envp)
 {
 	char *cmd;
 	pid_t child_pid;
-	int status;
+	int status, exit_code;
 
 	cmd = NULL;
 	/* Check for an empty command */
@@ -32,7 +32,8 @@ int execute(char *app_name, char **args, char **envp)
 			exit(0);
 		else
 		{
-			exit(_atoi(args[1]));
+			exit_code = _atoi(args[1]);
+			exit((exit_code >= 0 && exit_code <= 255) ? exit_code : 256 - exit_code);
 		}
 	}
 	cmd = get_full_path(args[0]);
