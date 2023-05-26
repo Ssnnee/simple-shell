@@ -13,6 +13,10 @@ int shell_loop(char *app_name, char **envp);
 char *get_full_path(char *cmd, char **envp);
 char *get_path(char *cmd, char **envp);
 char *make_path_copy(char *str);
+int _strncmp(char *str1, char *str2, int n);
+char *_strcat(char *dest, char *src);
+int _strlen(char *s);
+char *_strcpy(char *dest, char *src);
 int _strcmp(char *str1, char *str2);
 
 char *_getline(void);
