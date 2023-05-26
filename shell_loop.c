@@ -23,6 +23,7 @@ int shell_loop(char *app_name, char **envp)
 	ssize_t nread;
 	char **args;
 	int status, i;
+	char *command, *saveptr;
 
 	do {
 		if (isatty(STDIN_FILENO))
@@ -30,29 +31,27 @@ int shell_loop(char *app_name, char **envp)
 			_putchar('$');
 			_putchar(' ');
 		}
-
 		nread = getline(&line, &len, stdin);
 		if (nread == -1)
 		{
 			free(line);
 			exit(EXIT_SUCCESS);
 		}
-
 		i = 0;
-		while (line[i] != '\0' && (line[i] == ' ' ||
-					line[i] == '\t' || line[i] == '\n'))
+		while (line[i] != '\0' && (line[i] == ' '
+					|| line[i] == '\t' || line[i] == '\n'))
 			i++;
 		if (line[i] == '\0')
 			continue;
-
-		args = parse_line(line);
-
-		status = execute(app_name, args, envp);
-
-		free(args);
+		command = _strtok_two(line, ";", &saveptr);
+		while (command != NULL)
+		{
+			args = parse_line(command);
+			status = execute(app_name, args, envp);
+			free(args);
+			command = _strtok_two(NULL, ";", &saveptr);
+		}
 	} while (status);
-
 	free(line);
 	return (EXIT_SUCCESS);
 }
-
