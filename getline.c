@@ -80,7 +80,7 @@ char *_getline(void)
 	char *line;
 	int line_pos, line_size;
 
-	buf_pos = 0, buf_size = 0, line_pos = 0, line_size = 0, line = NULL;
+	line_pos = 0, line_size = 0, line = NULL;
 	while (1)
 	{
 		if (buf_pos >= buf_size)
