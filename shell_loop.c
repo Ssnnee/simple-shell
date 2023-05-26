@@ -21,7 +21,7 @@ int shell_loop(char *app_name, char **envp)
 	char *line = NULL;
 	size_t len = 0;
 	ssize_t nread;
-	char **args = NULL;
+	char **args;
 	int status, i;
 	char *command, *saveptr;
 
@@ -42,9 +42,7 @@ int shell_loop(char *app_name, char **envp)
 					|| line[i] == '\t' || line[i] == '\n'))
 			i++;
 		if (line[i] == '\0')
-		{ free(args);
 			continue;
-		}
 		command = _strtok_two(line, ";", &saveptr);
 		while (command != NULL)
 		{

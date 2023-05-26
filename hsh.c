@@ -75,13 +75,13 @@ int _putchar(int c)
  * get_full_path - this function gets the full path
  * of the command
  * @cmd: string of the command
- * @envp: environment pointer
  *
  * Return: full path of the cmd
  */
-char *get_full_path(char *cmd, char **envp)
+char *get_full_path(char *cmd)
 {
-	int i = 0, found = 0;
+	int i = 0, found = 0, j = 0;
+	char *new_cmd;
 
 	while (cmd[i] != '\0')
 	{
@@ -97,7 +97,21 @@ char *get_full_path(char *cmd, char **envp)
 	if (found)
 		return (cmd);
 
-	return (get_path(cmd, envp));
+	/* i already contains the size of initial cmd*/
+	/* we add 5 for '/bin/ */
+	new_cmd = malloc(sizeof(char) * (i + 5));
+	new_cmd[0] = '/';
+	new_cmd[1] = 'b';
+	new_cmd[2] = 'i';
+	new_cmd[3] = 'n';
+	new_cmd[4] = '/';
+
+	while (j < i)
+	{
+		*(new_cmd + 5 + j) = *(cmd + j);
+		j++;
+	}
+	return (new_cmd);
 }
 
 /**
@@ -120,140 +134,3 @@ int _strcmp(char *str1, char *str2)
 	return (1);
 }
 
-/**
- * _strncmp - compares the first n characters of a string
- * @str1: first string
- * @str2: second string
- * @n: number of chars to compare
- *
- * Return: 1 if equal, 0 otherwise
- */
-int _strncmp(char *str1, char *str2, int n)
-{
-	int i = 0;
-
-	while (i < n)
-	{
-		if (*(str1 + i) != *(str2 + i))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-/**
- * _strcat - Concatenate two strings
- * @dest: Destination string
- * @src: string to append
- * Return: pointer to string dest
- */
-char *_strcat(char *dest, char *src)
-{
-	int i = 0;
-	int j = 0;
-	
-	printf("dest : %p\n", dest);
-	printf("src: %p\n", src);
-
-	while (*(dest + i) != '\0')
-	{
-		i++;
-	}
-
-	while (*(src + j) != '\0')
-	{
-		*(dest + i) = *(src + j);
-		j++;
-		i++;
-	}
-	*(dest + i) = '\0';
-	return (dest);
-}
-
-/**
- * _strlen - function that returns the length of a string
- * @s: pointer to string value
- * Return: int (length of the string)
- */
-int _strlen(char *s)
-{
-	int i = 0;
-
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
-/**
- * _strcpy - copies the content of a array to another
- * @dest: destination array
- * @src: source array
- * Return: char pointer to dest
- */
-char *_strcpy(char *dest, char *src)
-{
-	int i = 0;
-
-	while (*(src + i))
-	{
-		*(dest + i) = *(src + i);
-		i++;
-	}
-	*(dest + i) = '\0';
-	return (dest);
-}
-
-/**
- * get_path - gets the path based on the command
- * @cmd: command
- * @envp: environment pointer
- *
- * Return: full path if found and the cmd itself otherwise
- */
-char *get_path(char *cmd, char **envp)
-{
-	char *path;
-	char *dir, *dirFull;
-	int i = 0;
-	char *path_copy;
-	
-	/* Search for PATH var in envp*/
-	while (_strncmp(envp[i], "PATH=", 5) == 0)
-		i++;
-
-	path = envp[i];
-	path_copy = make_path_copy(path);
-	dir = strtok(path_copy, "=");
-	dir = strtok(NULL, ":");
-
-	while (dir != NULL)
-	{
-		dirFull = malloc(sizeof(char) * (_strlen(dir) + 1 + _strlen(cmd)));
-		_strcpy(dirFull, dir);
-		dirFull = _strcat(_strcat(dirFull, "/"), cmd);
-		if (access(dirFull, F_OK) == 0)
-		{
-			return (dirFull);
-		}
-		free(dirFull);
-		dir = strtok(NULL, ":");
-	}
-	return (cmd);
-}
-
-/**
- * make_path_copy - makes a copy of path for manipulations
- * @envp: environment variables =
- *
- * Return: a copy of path
- */
-char *make_path_copy(char *path)
-{
-	char *path_copy;
-	path_copy = malloc(sizeof(char) * (strlen(path) + 1));
-
-	strcpy(path_copy, path);
-	return (path_copy);
-}
