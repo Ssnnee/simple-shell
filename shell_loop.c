@@ -42,7 +42,9 @@ int shell_loop(char *app_name, char **envp)
 					|| line[i] == '\t' || line[i] == '\n'))
 			i++;
 		if (line[i] == '\0')
+		{ free(args);
 			continue;
+		}
 		command = _strtok_two(line, ";", &saveptr);
 		while (command != NULL)
 		{
