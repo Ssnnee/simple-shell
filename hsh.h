@@ -10,7 +10,9 @@ int execute(char *app_name, char **args, char **envp);
 char **parse_line(char *line);
 int shell_loop(char *app_name, char **envp);
 
-char *get_full_path(char *cmd);
+char *get_full_path(char *cmd, char **envp);
+char *get_path(char *cmd, char **envp);
+char *make_path_copy(char *str);
 int _strcmp(char *str1, char *str2);
 
 char *_getline(void);
