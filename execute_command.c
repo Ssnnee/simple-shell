@@ -20,7 +20,7 @@ int execute(char *app_name, char **args, char **envp)
 {
 	char *cmd;
 	pid_t child_pid;
-	int status, exit_code;	
+	int status, exit_code;
 
 	cmd = NULL;
 	/* Check for an empty command */
@@ -28,17 +28,7 @@ int execute(char *app_name, char **args, char **envp)
 		return (1);
 	if (_strcmp(args[0], "exit"))
 	{
-		if (args[1] == NULL)
-		{
-			free(args);
-			exit(0);
-		}
-		else
-		{
-			exit_code = _atoi(args[1]);
-			free(args);
-			exit(exit_code);
-		}
+		_exit(args);
 	}
 	cmd = get_full_path(*(args + 0), envp);
 
