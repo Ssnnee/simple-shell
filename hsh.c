@@ -19,13 +19,14 @@ int main(int argc, char **argv, char **envp)
 { int fd;
 	char buf[MAX_LINE];
 	ssize_t nread, i;
-	char *line, *new_line;
+	char *line, *new_line, *args;
 	size_t line_size, j;
-	char **args;
 
 	line = NULL, line_size = 0;
 	if (argc > 1)
 	{
+		if (_strcmp(argv[1], "env"))
+			return (_printenv(envp));
 		fd = open(argv[1], O_RDONLY);
 		if (fd == -1)
 		{ perror(argv[0]);
@@ -38,10 +39,8 @@ int main(int argc, char **argv, char **envp)
 				if (buf[i] == '\n')
 				{ args = parse_line(line);
 					execute(argv[0], args, envp);
-					free(args);
-					free(line);
-					line = NULL;
-					line_size = 0;
+					free(args), free(line);
+					line = NULL, line_size = 0;
 				}
 				else
 				{ new_line = malloc(line_size + 2);
