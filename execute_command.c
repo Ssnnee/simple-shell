@@ -50,7 +50,7 @@ int execute(char *app_name, char **args, char **envp)
 	{
 		if (execve(cmd, args, envp) == -1)
 		{
-			ex = getenv("?");	
+			ex = getenv("?");
 			perror(app_name);
 			exit(_atoi(ex));
 		}
