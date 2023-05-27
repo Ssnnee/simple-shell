@@ -28,6 +28,8 @@ int execute(char *app_name, char **args, char **envp)
 		return (1);
 	if (_strcmp(args[0], "exit"))
 	{
+		free(args);
+		free(cmd);
 		if (args[1] == NULL)
 			exit(0);
 		else
@@ -57,6 +59,7 @@ int execute(char *app_name, char **args, char **envp)
 	}
 	else
 		wait(&status);
+	free(cmd);
 	return (1);
 }
 
