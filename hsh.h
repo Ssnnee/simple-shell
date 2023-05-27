@@ -31,4 +31,5 @@ int _get_line_from_buf(char *buf, int *buf_pos, int buf_size, char **line, int *
 char *_strtok_two(char *str, char *delimiters, char **saveptr);
 char *_memset(char *str, char b, unsigned int n);
 char *_strdup(char *str);
+int _printenv(char **env);
 #endif

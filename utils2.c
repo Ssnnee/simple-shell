@@ -49,3 +49,22 @@ char *_strdup(char *str)
 
 	return (dup);
 }
+
+/**
+ * _printenv - prints the environment
+ * @envp: env pointer variable
+ *
+ * Return: status
+ */
+int _printenv(char **envp)
+{
+	int i = 0;
+
+	while (envp[i] != NULL)
+	{
+		write(STDOUT_FILENO, envp[i], (_strlen(envp[i]) - 1));
+		write(STDOUT_FILENO, "\n", 1);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}

@@ -38,6 +38,8 @@ int execute(char *app_name, char **args, char **envp)
 			exit((exit_code >= 0 && exit_code <= 255) ? exit_code : exit_code % 256);
 		}
 	}
+	if (_strcmp(args[0], "env"))
+		return (_printenv(envp));
 	cmd = get_full_path(args[0], envp);
 	/* Check if the command exists */
 	if (access(cmd, X_OK) == -1)
