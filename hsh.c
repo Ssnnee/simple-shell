@@ -127,7 +127,7 @@ char *get_path(char *cmd, char **envp)
 	{
 		dirFull = malloc(sizeof(char) * (_strlen(dir) + _strlen(cmd)));
 		_strcpy(dirFull, dir);
-		dirFull = _strcat(_strcat(dirFull, slash), cmd);
+		dirFull = strcat(strcat(dirFull, slash), cmd);
 		if (access(dirFull, F_OK) == 0)
 		{
 			return (dirFull);
