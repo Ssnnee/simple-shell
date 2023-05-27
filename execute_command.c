@@ -52,6 +52,7 @@ int execute(char *app_name, char **args, char **envp)
 	{
 		if (execve(cmd, args, envp) == -1)
 		{
+			free(cmd);
 			ex = getenv("?");
 			perror(app_name);
 			exit(_atoi(ex));
@@ -59,7 +60,7 @@ int execute(char *app_name, char **args, char **envp)
 	}
 	else
 		wait(&status);
+	kill(child_pid, SIGTERM);
 	free(cmd);
 	return (1);
 }
-
