@@ -87,7 +87,7 @@ void my_exit(char **args, char *cmd, char **envp)
 	if (args[1] == NULL)
 	{
 		my_free_args(args);
-		_exit(0);
+		_exit(EXIT_SUCCESS);
 	}
 	else
 	{
