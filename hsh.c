@@ -134,6 +134,7 @@ char *get_path(char *cmd, char **envp)
 		}
 		dir = strtok(NULL, ":");
 	}
+	free(path_copy);
 	return (cmd);
 }
 
