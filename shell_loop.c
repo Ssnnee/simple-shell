@@ -22,7 +22,7 @@ int shell_loop(char *app_name, char **envp)
 	size_t len = 0;
 	ssize_t nread;
 	char **args;
-	int status, i;
+	int status = 1, i;
 	char *command, *saveptr;
 
 	do {
