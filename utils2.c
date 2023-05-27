@@ -62,7 +62,7 @@ int _printenv(char **envp)
 
 	while (envp[i] != NULL)
 	{
-		write(STDOUT_FILENO, envp[i], (_strlen(envp[i]) - 1));
+		write(STDOUT_FILENO, envp[i], _strlen(envp[i]));
 		write(STDOUT_FILENO, "\n", 1);
 		i++;
 	}
