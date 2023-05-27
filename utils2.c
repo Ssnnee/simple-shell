@@ -80,6 +80,7 @@ int _printenv(char **envp)
 void my_exit(char **args, char *cmd, char **envp)
 {
 	int exit_code;
+
 	envp = NULL;
 	free(envp);
 	free(cmd);
