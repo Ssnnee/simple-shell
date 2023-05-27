@@ -68,3 +68,25 @@ int _printenv(char **envp)
 	}
 	return (EXIT_SUCCESS);
 }
+
+/**
+ * my_exit - exits the program
+ * @args: arguments
+ * @cmd: command
+ *
+ * Return: void
+ */
+void my_exit(char **args, char *cmd)
+{
+	int exit_code;
+
+	free(args);
+	free(cmd);
+	if (args[1] == NULL)
+		_exit(0);
+	else
+	{
+		exit_code = _atoi(args[1]);
+		_exit((exit_code >= 0 && exit_code <= 255) ? exit_code : exit_code % 256);
+	}
+}
