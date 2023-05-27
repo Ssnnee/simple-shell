@@ -53,5 +53,6 @@ int shell_loop(char *app_name, char **envp)
 		}
 	} while (status);
 	free(line);
+	free(command);
 	return (EXIT_SUCCESS);
 }

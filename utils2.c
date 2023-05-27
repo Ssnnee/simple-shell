@@ -73,20 +73,40 @@ int _printenv(char **envp)
  * my_exit - exits the program
  * @args: arguments
  * @cmd: command
+ * @envp: environment pointer
  *
  * Return: void
  */
-void my_exit(char **args, char *cmd)
+void my_exit(char **args, char *cmd, char **envp)
 {
 	int exit_code;
-
-	free(args);
+	envp = NULL;
+	free(envp);
 	free(cmd);
 	if (args[1] == NULL)
+	{
+		my_free_args(args);
 		_exit(0);
+	}
 	else
 	{
 		exit_code = _atoi(args[1]);
+		my_free_args(args);
 		_exit((exit_code >= 0 && exit_code <= 255) ? exit_code : exit_code % 256);
 	}
+}
+
+/**
+ * my_free_args - frees args variable
+ * @args: var to free
+ *
+ * Return: void
+ */
+void my_free_args(char **args)
+{
+	int i = 0;
+
+	while (args[i])
+		free(args[i++]);
+	free(args);
 }

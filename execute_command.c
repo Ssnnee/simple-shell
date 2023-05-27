@@ -28,7 +28,7 @@ int execute(char *app_name, char **args, char **envp)
 		return (1);
 	if (_strcmp(args[0], "exit"))
 	{
-		my_exit(args, cmd);
+		my_exit(args, cmd, envp);
 	}
 	if (_strcmp(args[0], "env"))
 		return (_printenv(envp));

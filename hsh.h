@@ -32,5 +32,6 @@ char *_strtok_two(char *str, char *delimiters, char **saveptr);
 char *_memset(char *str, char b, unsigned int n);
 char *_strdup(char *str);
 int _printenv(char **env);
-void my_exit(char **args, char *cmd);
+void my_exit(char **args, char *cmd, char **envp);
+void my_free_args(char **args);
 #endif

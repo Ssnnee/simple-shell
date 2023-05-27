@@ -39,7 +39,7 @@ int main(int argc, char **argv, char **envp)
 				if (buf[i] == '\n')
 				{ args = parse_line(line);
 					execute(argv[0], args, envp);
-					free(args), free(line);
+					my_free_args(args), free(line);
 					line = NULL, line_size = 0;
 				}
 				else
@@ -129,6 +129,7 @@ char *get_path(char *cmd, char **envp)
 		_strcpy(dirFull, dir);
 		if (access(_strcat(_strcat(dirFull, slash), cmd), F_OK) == 0)
 		{
+			free(path_copy);
 			return (_strdup(dirFull));
 		}
 		dir = strtok(NULL, ":");
