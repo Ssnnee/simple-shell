@@ -110,8 +110,9 @@ char *get_full_path(char *cmd, char **envp)
 char *get_path(char *cmd, char **envp)
 {
 	char *path;
-	char *dir, *dirFull;
+	char *dir;
 	int i = 0;
+	char dirFull[1024];
 	char *path_copy, *slash = "/";
 
 	/* Search for PATH var in envp*/
@@ -125,14 +126,12 @@ char *get_path(char *cmd, char **envp)
 
 	while (dir != NULL)
 	{
-		dirFull = malloc(sizeof(char) * (_strlen(dir) + _strlen(cmd) + 1));
+		_memset(dirFull, 0, 1024);
 		_strcpy(dirFull, dir);
-		dirFull = _strcat(_strcat(dirFull, slash), cmd);
-		if (access(dirFull, F_OK) == 0)
+		if (access(_strcat(_strcat(dirFull, slash), cmd), F_OK) == 0)
 		{
-			return (dirFull);
+			return (_strdup(dirFull));
 		}
-		free(dirFull);
 		dir = strtok(NULL, ":");
 	}
 	return (cmd);
