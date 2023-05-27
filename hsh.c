@@ -140,7 +140,7 @@ char *get_path(char *cmd, char **envp)
 
 /**
  * make_path_copy - makes a copy of path for manipulations
- * @envp: environment variables =
+ * @path: environment variables =
  *
  * Return: a copy of path
  */
