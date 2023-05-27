@@ -18,7 +18,7 @@
  */
 int execute(char *app_name, char **args, char **envp)
 {
-	char *cmd;
+	char *cmd, *ex;
 	pid_t child_pid;
 	int status, exit_code;
 
@@ -50,8 +50,9 @@ int execute(char *app_name, char **args, char **envp)
 	{
 		if (execve(cmd, args, envp) == -1)
 		{
+			ex = getenv("?");	
 			perror(app_name);
-			exit(EXIT_FAILURE);
+			exit(_atoi(ex));
 		}
 	}
 	else
