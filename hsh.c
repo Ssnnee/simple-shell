@@ -19,7 +19,7 @@ int main(int argc, char **argv, char **envp)
 { int fd;
 	char buf[MAX_LINE];
 	ssize_t nread, i;
-	char *line, *new_line, *args;
+	char *line, *new_line, **args;
 	size_t line_size, j;
 
 	line = NULL, line_size = 0;
